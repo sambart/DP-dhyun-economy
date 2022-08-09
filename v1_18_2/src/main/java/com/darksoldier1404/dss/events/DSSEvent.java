@@ -5,15 +5,27 @@ import com.darksoldier1404.dppc.utils.NBT;
 import com.darksoldier1404.dss.SimpleShop;
 import com.darksoldier1404.dss.functions.DSSFunction;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 @SuppressWarnings("all")
 public class DSSEvent implements Listener {
     private final SimpleShop plugin = SimpleShop.getInstance();
+
+    //빌리저 클릭 이벤트
+    public void onVillagerClick(PlayerInteractEntityEvent event) {
+        Villager villager = (Villager) event.getRightClicked();
+        if (event.getRightClicked() instanceof Villager) {
+            if (villager.getCustomName() == "Villagers name") {
+                event.setCancelled(true);
+            }
+        }
+    }
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {

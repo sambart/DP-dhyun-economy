@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -70,21 +71,46 @@ public class DSSFunction {
 
     //상점 좌표 매핑
     public static void mappingShop(CommandSender p, String name, String username){
-        if (!p.hasPermission("dss.admin")) {
-            p.sendMessage(prefix + lang.get("shop_cmd_permission_required"));
-            return;
+        if (plugin.shops.containsKey(name)) {
+            if (!p.hasPermission("dss.admin")) {
+                p.sendMessage(prefix + lang.get("shop_cmd_permission_required"));
+                return;
+            }
+
+            Player target = plugin.getServer().getPlayer(username);
+
+            /*
+            if (!(p instanceof Player)) {
+                p.sendMessage(prefix + "플레이어로 변경할 수 없습니다");
+                return;
+            }
+            Player src = (Player) p;
+            */
+            Player src = target;
+
+            double pX = src.getLocation().getX();
+            double pY = src.getLocation().getX();
+            double pZ = src.getLocation().getX();
+            List<Entity> nearNpc = src.getNearbyEntities(pX,pY,pZ);
+
+            for (Entity entity : nearNpc) {
+
+            }
+
+            YamlConfiguration shop = plugin.shops.get(name);
+            shop.set("Shop.x", pX);
+            shop.set("Shop.y", pY);
+            shop.set("Shop.z", pZ);
         }
-
-        Player target = plugin.getServer().getPlayer(username);
-        /*
-        target.
-
-        shop.set("Shop.x", x);
-        shop.set("Shop.y", y);
-        shop.set("Shop.z", z);
-         */
+        else {
+            p.sendMessage(prefix + lang.get("shop_func_shop_is_not_exist"));
+        }
     }
 
+    //상점 좌표 오른쪽 클릭
+    public static void mappingShopClick(CommandSender p, String name, String username){
+
+    }
 
     public static void openShop(CommandSender p, String name, String username) {
         if (!p.hasPermission("dss.admin")) {
