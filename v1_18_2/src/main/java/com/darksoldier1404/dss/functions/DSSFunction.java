@@ -14,6 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -70,46 +71,44 @@ public class DSSFunction {
     }
 
     //상점 좌표 매핑
-    public static void mappingShop(CommandSender p, String name, String username){
+    public static void mappingShop(CommandSender p, String name){
+        if (!p.hasPermission("dss.admin")) {
+            p.sendMessage(prefix + lang.get("shop_cmd_permission_required"));
+            return;
+        }
+
         if (plugin.shops.containsKey(name)) {
-            if (!p.hasPermission("dss.admin")) {
-                p.sendMessage(prefix + lang.get("shop_cmd_permission_required"));
-                return;
-            }
-
-            Player target = plugin.getServer().getPlayer(username);
-
-            /*
+            //Player target = plugin.getServer().getPlayer(username);
             if (!(p instanceof Player)) {
                 p.sendMessage(prefix + "플레이어로 변경할 수 없습니다");
                 return;
             }
-            Player src = (Player) p;
-            */
-            Player src = target;
+            Player srcPlayer = (Player) p;
 
-            double pX = src.getLocation().getX();
-            double pY = src.getLocation().getX();
-            double pZ = src.getLocation().getX();
-            List<Entity> nearNpc = src.getNearbyEntities(pX,pY,pZ);
-
-            for (Entity entity : nearNpc) {
-
+            double pX = srcPlayer.getLocation().getX();
+            double pY = srcPlayer.getLocation().getX();
+            double pZ = srcPlayer.getLocation().getX();
+            List<Entity> nearNpcs = srcPlayer.getNearbyEntities(pX,pY,pZ);
+            Villager nearNpc = null;
+            for (Entity entity : nearNpcs) {
+                if(entity instanceof Villager){
+                    nearNpc = (Villager) entity;
+                    break;
+                }
             }
 
+            if(nearNpc == null){
+                p.sendMessage(prefix + "근처 NPC를 찾을 수 없습니다.");
+                return;
+            }
+            //근처 NPC의 이름을 상점이름으로 변경
+            nearNpc.setCustomName(name);
+
             YamlConfiguration shop = plugin.shops.get(name);
-            shop.set("Shop.x", pX);
-            shop.set("Shop.y", pY);
-            shop.set("Shop.z", pZ);
         }
         else {
             p.sendMessage(prefix + lang.get("shop_func_shop_is_not_exist"));
         }
-    }
-
-    //상점 좌표 오른쪽 클릭
-    public static void mappingShopClick(CommandSender p, String name, String username){
-
     }
 
     public static void openShop(CommandSender p, String name, String username) {

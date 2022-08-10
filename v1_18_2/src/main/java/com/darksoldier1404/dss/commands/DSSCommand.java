@@ -36,6 +36,21 @@ public class DSSCommand implements CommandExecutor, TabCompleter {
             sender.sendMessage(prefix + lang.get("shop_cmd_open"));
             return false;
         }
+        if (args[0].equals("연결") || args[0].equalsIgnoreCase("mapping")) {
+            if (!sender.hasPermission("dss.admin")) {
+                sender.sendMessage(prefix + lang.get("shop_cmd_permission_required"));
+                return false;
+            }
+            if (args.length == 1) {
+                sender.sendMessage(prefix + lang.get("shop_cmd_require_name"));
+                return false;
+            }
+            if (args.length == 2) {
+                DSSFunction.mappingShop(sender, args[1]);
+                return false;
+            }
+        }
+
         if (args[0].equals("오픈") || args[0].equalsIgnoreCase("open")) {
             if (args.length == 1) {
                 sender.sendMessage(prefix + lang.get("shop_cmd_require_name"));
@@ -218,9 +233,9 @@ public class DSSCommand implements CommandExecutor, TabCompleter {
         if (sender.hasPermission("dss.admin")) {
             if (args.length == 1) {
                 if (lang.getCurrentLang().getString("Lang").equals("Korean")) {
-                    return Arrays.asList("생성", "타이틀", "진열", "가격", "목록", "초기화", "삭제", "전체삭제", "오픈", "리로드");
+                    return Arrays.asList("생성", "타이틀", "진열", "연결", "가격", "목록", "초기화", "삭제", "전체삭제", "오픈", "리로드");
                 } else {
-                    return Arrays.asList("create", "title", "display", "price", "list", "reset", "delete", "deleteall", "open", "reload");
+                    return Arrays.asList("create", "title", "display", "mapping", "price", "list", "reset", "delete", "deleteall", "open", "reload");
                 }
             }
             if (args.length == 2) {

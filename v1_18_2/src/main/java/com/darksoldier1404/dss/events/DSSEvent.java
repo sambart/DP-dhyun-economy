@@ -4,6 +4,7 @@ import com.darksoldier1404.dppc.api.inventory.DInventory;
 import com.darksoldier1404.dppc.utils.NBT;
 import com.darksoldier1404.dss.SimpleShop;
 import com.darksoldier1404.dss.functions.DSSFunction;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
@@ -13,17 +14,24 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+import java.util.Map;
+
 @SuppressWarnings("all")
 public class DSSEvent implements Listener {
     private final SimpleShop plugin = SimpleShop.getInstance();
 
     //빌리저 클릭 이벤트
+    @EventHandler
     public void onVillagerClick(PlayerInteractEntityEvent event) {
+        Player p = (Player) event.getPlayer();
         Villager villager = (Villager) event.getRightClicked();
+        String villagerName = villager.getName();
         if (event.getRightClicked() instanceof Villager) {
-            if (villager.getCustomName() == "Villagers name") {
-                event.setCancelled(true);
+            if (!plugin.shops.containsKey(villagerName)) {
+                return;
             }
+            YamlConfiguration shop = plugin.shops.get(villagerName);
+            DSSFunction.openShop(p, villagerName, p.getName());
         }
     }
 
