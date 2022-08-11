@@ -1,3 +1,4 @@
 rootProject.name = 'DP-SimpleShop'
 include 'v1_18_2'
+include 'src'
 
