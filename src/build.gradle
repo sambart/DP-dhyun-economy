@@ -1,10 +1,9 @@
 plugins {
     id 'java'
-    id 'maven-publish'
 }
 
 group 'com.dhyun'
-version = '1.0.3'
+version = '1.0.2'
 
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
@@ -15,39 +14,6 @@ configurations {
 }
 jar {
     destinationDirectory.set(file("$rootDir/jars"))
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = 'com.dhyun.dsshop'
-            artifactId = 'DH-Shop'
-            version = '1.18.2-SNAPSHOT'
-            artifact '../jars/'+ jar.archiveName
-        }
-    }
-}
-
-compileJava.options.encoding = 'UTF-8'
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-    sourceCompatibility = JavaVersion.VERSION_17
-}
-
-build {
-    sourceCompatibility = 17
-    targetCompatibility = 17
-}
-
-group 'github.com/sambart'
-version = '1.0.3'
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://org.bstats/bstats-bukkit"
-    }
-    maven { url 'https://jitpack.io' }
 }
 
 build {
