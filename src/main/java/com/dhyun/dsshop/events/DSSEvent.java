@@ -3,6 +3,7 @@ package com.dhyun.dsshop.events;
 import com.darksoldier1404.dppc.api.inventory.DInventory;
 import com.darksoldier1404.dppc.utils.NBT;
 import com.dhyun.dsshop.SimpleShop;
+import com.dhyun.dsshop.api.economy.EconomyEvent;
 import com.dhyun.dsshop.functions.DSSFunction;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -18,7 +19,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 @SuppressWarnings("all")
 public class DSSEvent implements Listener {
     private final SimpleShop plugin = SimpleShop.getInstance();
-    ChangeBalanceEvent balanceEvent = new ChangeBalanceEvent("ChangeBalanceEvent Calling");
+    EconomyEvent balanceEvent = new EconomyEvent("ChangeBalanceEvent Calling");
 
     //빌리저 클릭 이벤트
     @EventHandler
