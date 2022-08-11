@@ -1,8 +1,8 @@
-package com.darksoldier1404.dss.commands;
+package com.dhyun.dsshop.commands;
 
 import com.darksoldier1404.dppc.lang.DLang;
-import com.darksoldier1404.dss.SimpleShop;
-import com.darksoldier1404.dss.functions.DSSFunction;
+import com.dhyun.dsshop.SimpleShop;
+import com.dhyun.dsshop.functions.DSSFunction;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

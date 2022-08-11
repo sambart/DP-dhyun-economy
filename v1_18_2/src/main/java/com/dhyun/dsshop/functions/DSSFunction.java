@@ -1,11 +1,11 @@
-package com.darksoldier1404.dss.functions;
+package com.dhyun.dsshop.functions;
 
 import com.darksoldier1404.dppc.api.essentials.MoneyAPI;
 import com.darksoldier1404.dppc.api.inventory.DInventory;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dppc.utils.ConfigUtils;
 import com.darksoldier1404.dppc.utils.NBT;
-import com.darksoldier1404.dss.SimpleShop;
+import com.dhyun.dsshop.SimpleShop;
 import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

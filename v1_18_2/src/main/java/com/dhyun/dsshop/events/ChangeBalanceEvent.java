@@ -1,4 +1,4 @@
-package com.darksoldier1404.dss.events;
+package com.dhyun.dsshop.events;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;

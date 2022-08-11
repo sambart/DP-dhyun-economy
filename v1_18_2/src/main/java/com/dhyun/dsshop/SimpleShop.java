@@ -1,11 +1,11 @@
-package com.darksoldier1404.dss;
+package com.dhyun.dsshop;
 
 import com.darksoldier1404.dppc.DPPCore;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dppc.utils.ConfigUtils;
-import com.darksoldier1404.dss.commands.DSSCommand;
-import com.darksoldier1404.dss.events.DSSEvent;
-import com.darksoldier1404.dss.functions.DSSFunction;
+import com.dhyun.dsshop.commands.DSSCommand;
+import com.dhyun.dsshop.events.DSSEvent;
+import com.dhyun.dsshop.functions.DSSFunction;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;

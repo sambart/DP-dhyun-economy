@@ -1,9 +1,9 @@
-package com.darksoldier1404.dss.events;
+package com.dhyun.dsshop.events;
 
 import com.darksoldier1404.dppc.api.inventory.DInventory;
 import com.darksoldier1404.dppc.utils.NBT;
-import com.darksoldier1404.dss.SimpleShop;
-import com.darksoldier1404.dss.functions.DSSFunction;
+import com.dhyun.dsshop.SimpleShop;
+import com.dhyun.dsshop.functions.DSSFunction;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -14,8 +14,6 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-
-import java.util.Map;
 
 @SuppressWarnings("all")
 public class DSSEvent implements Listener {
