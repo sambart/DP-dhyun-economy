@@ -39,7 +39,7 @@ build {
     targetCompatibility = 17
 }
 
-group 'github.com/sambart'
+group 'com.dhyun'
 version = '1.0.3'
 
 repositories {
