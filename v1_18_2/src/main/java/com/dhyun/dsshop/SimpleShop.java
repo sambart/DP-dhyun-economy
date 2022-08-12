@@ -71,6 +71,7 @@ public class SimpleShop extends JavaPlugin {
             for (FastBoard board : this.boards.values()) {
                 BoardFunction.updateBoard(board);
             }
+            BoardFunction.BalnaceTop();
         }, 0, 20);
     }
     

@@ -4,8 +4,10 @@ import com.darksoldier1404.dppc.api.essentials.MoneyAPI;
 import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dppc.utils.ConfigUtils;
 import com.dhyun.dsshop.SimpleShop;
+import com.earth2me.essentials.utils.NumberUtil;
 import com.google.common.collect.Lists;
 import fr.mrmicky.fastboard.FastBoard;
+import net.essentialsx.api.v2.services.BalanceTop;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
@@ -18,10 +20,10 @@ import com.earth2me.essentials.Essentials;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
+import static com.earth2me.essentials.I18n.tl;
 import static org.bukkit.Bukkit.getServer;
 
 @SuppressWarnings("all")
@@ -34,6 +36,7 @@ public class BoardFunction {
     private static Scoreboard board = manager.getNewScoreboard();
 
     private static final String MAIN_BOARD_NAME = "온앤오프 보드";
+    private static StringBuilder rankStr = new StringBuilder();
 
     public static void InitAllBoard(){
         for(Player online : Bukkit.getOnlinePlayers()){
@@ -48,8 +51,24 @@ public class BoardFunction {
                 "",
                 "§0킬: §8" + board.getPlayer().getStatistic(Statistic.MOB_KILLS),
                 "",
-                "§0현금: §8" + MoneyAPI.getMoney(board.getPlayer()).toString()
+                "§0현금: §8" + MoneyAPI.getMoney(board.getPlayer()).toString(),
+                "",
+                rankStr.toString()
         );
+
+
+    }
+    public static StringBuilder BalnaceTop(){
+        int pos = 1;
+        rankStr.setLength(0);
+        for (final Map.Entry<UUID, BalanceTop.Entry> entry : ess.getBalanceTop().getBalanceTopCache().entrySet()) {
+            if (ess.getSettings().showZeroBaltop() || entry.getValue().getBalance().compareTo(BigDecimal.ZERO) > 0) {
+                rankStr.append(tl("balanceTopLine", pos, entry.getValue().getDisplayName(), NumberUtil.displayCurrency(entry.getValue().getBalance(), ess)));
+                rankStr.append("\n");
+            }
+            pos++;
+        }
+        return rankStr;
     }
 
     public static void InitPlayerBoard(Player player){
