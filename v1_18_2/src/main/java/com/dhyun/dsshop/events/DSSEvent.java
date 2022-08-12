@@ -18,7 +18,6 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 @SuppressWarnings("all")
 public class DSSEvent implements Listener {
     private final SimpleShop plugin = SimpleShop.getInstance();
-    ChangeBalanceEvent balanceEvent = new ChangeBalanceEvent("ChangeBalanceEvent Calling");
 
     //빌리저 클릭 이벤트
     @EventHandler
@@ -50,8 +49,6 @@ public class DSSEvent implements Listener {
                     DSSFunction.saveShopShowCase(p, di);
                 }
             }
-            Bukkit.getServer().getPluginManager().callEvent(balanceEvent);
-            Bukkit.getServer().broadcastMessage(balanceEvent.getMessage());
         }
     }
 

@@ -6,6 +6,8 @@ import com.darksoldier1404.dppc.lang.DLang;
 import com.darksoldier1404.dppc.utils.ConfigUtils;
 import com.darksoldier1404.dppc.utils.NBT;
 import com.dhyun.dsshop.SimpleShop;
+import com.dhyun.dsshop.constants.EconomyType;
+import com.dhyun.dsshop.events.EconomyEvent;
 import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,14 +23,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
+
+import static org.bukkit.Bukkit.getLogger;
 
 @SuppressWarnings("all")
 public class DSSFunction {
     private static final SimpleShop plugin = SimpleShop.getInstance();
     private static final String prefix = plugin.prefix;
     private static final DLang lang = plugin.lang;
-
+    
     public static void openShop(Player p, String name) {
         if (!plugin.shops.containsKey(name)) {
             p.sendMessage(prefix + lang.get("shop_func_shop_is_not_exist"));
@@ -346,6 +351,10 @@ public class DSSFunction {
             }
             MoneyAPI.takeMoney(p, price);
             p.sendMessage(prefix + lang.get("shop_func_bought_item"));
+
+            EconomyEvent event = new EconomyEvent(p, EconomyType.BUY, BigDecimal.valueOf(price), r);
+            Bukkit.getServer().getPluginManager().callEvent(event);
+            getLogger().info(p.getName() + "님이 " + String.valueOf(price) + "을 사용하여" + r.getItemMeta().getDisplayName() + "을" + String.valueOf(amount) + "개 구매했습니다." + "\n현재 돈: " + String.valueOf(MoneyAPI.getMoney(p)));
         } else {
             p.sendMessage(prefix + lang.get("shop_func_inventory_full"));
         }
@@ -400,6 +409,9 @@ public class DSSFunction {
             return;
         }
         MoneyAPI.addMoney(p, price);
+        EconomyEvent event = new EconomyEvent(p, EconomyType.SELL, BigDecimal.valueOf(price), r);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        getLogger().info(p.getName() + "님이 " + r.getItemMeta().getDisplayName() + "을" + String.valueOf(amount) + "개 판매하여" + String.valueOf(price) + "벌었습니다."+ "\n현재 돈: " + String.valueOf(MoneyAPI.getMoney(p)));
         p.sendMessage(prefix + lang.getWithArgs("shop_func_sold_item", String.valueOf(price)));
     }
 

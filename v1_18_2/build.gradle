@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 configurations {
     jar.archiveName = 'DH-Shop-_' + name + '-SNAPSHOT.jar'
@@ -54,4 +55,11 @@ dependencies {
     compileOnly 'org.bukkit.craftbukkit:craftbukkit:R0.1:1.18.2'
     compileOnly 'org.spigotmc:spigot-api:R0.1:1.18.2'
     compileOnly 'com.darksoldier1404.dppc:DPP-Core:1.18.2-SNAPSHOT'
+    compileOnly 'com.earth2me.essentials:EssentialsX:2.19.3'
+    implementation 'fr.mrmicky:fastboard:1.2.1'
+}
+
+shadowJar {
+    // Replace 'com.yourpackage' with the package of your plugin
+    relocate 'fr.mrmicky.fastboard', 'com.dhyun.fastboard'
 }
