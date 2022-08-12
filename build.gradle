@@ -2,21 +2,15 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
-
-group 'com.dhyun'
-version = '1.0.3'
-
-compileJava.options.encoding = 'UTF-8'
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
 configurations {
-    jar.archiveName = rootProject.name + '-_' + name + '-' + version + '.jar'
+    jar.archiveName = 'DH-Shop-_' + name + '-SNAPSHOT.jar'
 }
 jar {
+    manifest {
+        attributes 'Main-Class': 'com.dhyun.dsshop.SimpleShop'
+    }
     destinationDirectory.set(file("$rootDir/jars"))
 }
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -27,7 +21,6 @@ publishing {
         }
     }
 }
-
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -39,21 +32,8 @@ build {
     targetCompatibility = 17
 }
 
-group 'com.dhyun'
+group 'github.com/sambart'
 version = '1.0.3'
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://org.bstats/bstats-bukkit"
-    }
-    maven { url 'https://jitpack.io' }
-}
-
-build {
-    sourceCompatibility = 17
-    targetCompatibility = 17
-}
 
 repositories {
     mavenCentral()
@@ -61,6 +41,10 @@ repositories {
         url "http://dpp.dpnw.site:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
+    maven {
+        url "https://org.bstats/bstats-bukkit"
+    }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {

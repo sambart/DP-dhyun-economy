@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 configurations {
-    jar.archiveName = 'DS-Shop-_' + name + '-SNAPSHOT.jar'
+    jar.archiveName = 'DH-Shop-_' + name + '-SNAPSHOT.jar'
 }
 jar {
     manifest {
@@ -21,7 +21,6 @@ publishing {
         }
     }
 }
-
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -39,22 +38,13 @@ version = '1.0.3'
 repositories {
     mavenCentral()
     maven {
-        url "https://org.bstats/bstats-bukkit"
-    }
-    maven { url 'https://jitpack.io' }
-}
-
-build {
-    sourceCompatibility = 17
-    targetCompatibility = 17
-}
-
-repositories {
-    mavenCentral()
-    maven {
         url "http://dpp.dpnw.site:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
+    maven {
+        url "https://org.bstats/bstats-bukkit"
+    }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
